@@ -59,3 +59,5 @@ https://www.kaggle.com/datasets/mdhamani/goodreads-books-100k
 * Guest
     * Pengguna yang belum mendaftarkan diri hanya bisa melihat daftar buku dan review yang ada pada buku tersebut tanpa bisa mengakses fitur lain yang tersedia.
 
+## Berita Acara
+[Berita Acara A10](https://docs.google.com/spreadsheets/d/1azkHBVeqnpd1yoqG0f9LsqfLRf2LzaDq/edit?usp=sharing&ouid=103735609119790165969&rtpof=true&sd=true)
