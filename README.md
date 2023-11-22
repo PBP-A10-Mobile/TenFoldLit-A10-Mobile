@@ -12,6 +12,8 @@ Gita adalah seorang anak yang sangat mencintai dunia literatur. Ia sering mengha
 
 TenfoldLit memungkinkan pengguna untuk melihat ulasan buku dari berbagai genre, serta membaca komentar dari pembaca lainnya. Gita dapat menjadi anggota dan memberikan review serta komentar, dan yang lebih penting, dia dapat memberikan rating kepada buku-buku yang telah dia baca. Ia juga senang bahwa web ini memungkinkan pengguna untuk meminjam buku, melihat stok buku, dan menyimpan buku favoritnya dalam daftar favorit sehingga ia mampu menyusun daftar bacaan selanjutnya dengan lebih mudah. Dengan TenfoldLit, Gita merasa lebih terhubung dengan komunitas pembaca yang sama-sama bersemangat tentang literatur, dan pengalaman membacanya menjadi lebih menyenangkan.
 
+Tidak hanya itu, Gita juga menemukan kepraktisan TenfoldLit karena sudah dapat diakses melalui aplikasi mobile. Dengan begitu, Gita bisa tetap terhubung dengan dunia literatur favoritnya di mana saja dan kapan saja tanpa perlu membuka komputer. Dengan akses yang lebih mudah dan cepat, Gita merasa semakin terintegrasikan dengan komunitas pembaca TenfoldLit, menjadikan pengalaman literaturnya semakin dinamis dan menyenangkan.
+
 ## 🗂️ Daftar Modul 🗂️ 
 Berikut ini beberapa fitur yang disediakan pada situs TenFoldIt:
 ### 🏠 Homepage (Caressa Putri Yuliantoro) :
