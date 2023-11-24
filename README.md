@@ -15,7 +15,7 @@ TenfoldLit memungkinkan pengguna untuk melihat ulasan buku dari berbagai genre, 
 Tidak hanya itu, Gita juga menemukan kepraktisan TenfoldLit karena sudah dapat diakses melalui aplikasi mobile. Dengan begitu, Gita bisa tetap terhubung dengan dunia literatur favoritnya di mana saja dan kapan saja tanpa perlu membuka komputer. Dengan akses yang lebih mudah dan cepat, Gita merasa semakin terintegrasikan dengan komunitas pembaca TenfoldLit, menjadikan pengalaman literaturnya semakin dinamis dan menyenangkan.
 
 ## 🗂️ Daftar Modul 🗂️ 
-Berikut ini beberapa fitur yang disediakan pada situs TenfoldLit:
+Berikut ini beberapa fitur yang disediakan pada aplikasi TenfoldLit:
 ### 🏠 Homepage (Caressa Putri Yuliantoro) :
 * Tampilan beranda yang menampilkan daftar buku.
 * Ditampilkan opsi pencarian buku.
