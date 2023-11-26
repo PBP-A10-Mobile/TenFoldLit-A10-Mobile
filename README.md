@@ -33,9 +33,8 @@ Berikut ini beberapa fitur yang disediakan pada aplikasi TenfoldLit:
 
 ### 📱 Catalog and Favorites (Vico Adli Narindra):
 * Menampilkan halaman katalog buku yang dapat diakses oleh semua pengguna.
-* Menampilkan halaman katalog pribadi (My Library) yang memungkinkan pengguna menyusun katalog buku pribadi mereka sendiri.
 * Menandai buku agar masuk dalam kategori favorit pengguna dan menampilkan halaman untuk menampilkan buku favorit
-* Form untuk menambah dan menghapus buku dari katalog pribadi pengguna (My Library).
+* Form untuk menambah dan menghapus buku favorit dari katalog pribadi pengguna.
 
 ### ⭐️ Review and Ratings (Vico Adli Narindra):
 * Halaman untuk menampilkan ulasan dan peringkat yang diberikan oleh pengguna pada buku tertentu.
@@ -44,6 +43,8 @@ Berikut ini beberapa fitur yang disediakan pada aplikasi TenfoldLit:
 ### 📒 My Books (Nadhira Raihana Hafez):
 * Halaman User Library untuk menampilkan buku yang dipinjam oleh user.
 * Halaman User Favorite untuk menampilkan buku yang di favorite oleh user
+* Menampilkan halaman katalog pribadi (My Library) yang memungkinkan pengguna menyusun katalog buku pribadi mereka sendiri.
+* Form untuk menambah dan menghapus buku yang dipinjam dari katalog pribadi pengguna.
 
 ### 👫 Friends (Muhammad Nabiel Subhan):
 * Halaman untuk untuk menampilkan friends yang dimiliki oleh user.
@@ -63,3 +64,10 @@ https://www.kaggle.com/datasets/mdhamani/goodreads-books-100k
 
 ## 📑 Berita Acara 📑
 [Berita Acara A10](https://docs.google.com/spreadsheets/d/1azkHBVeqnpd1yoqG0f9LsqfLRf2LzaDq/edit#gid=2120975129)
+
+## 🔃 Alur Pengintegrasian 🔃
+* Menambahkan dependensi http ke proyek; dependensi ini digunakan untuk bertukar HTTP request.
+* Membuat model pada Flutter yang sesuai dengan struktur data yang dikirim oleh API.
+* Membuat http request ke web service menggunakan dependensi http.
+* Mengonversikan data dari JSON ke objek model Flutter yang telah dibuat pada tahap ke dua.
+* Menggunakan widget seperti `FutureBuilder`untuk menampilkan data yang diterima dari API 
