@@ -24,7 +24,6 @@ Berikut ini beberapa fitur yang disediakan pada aplikasi TenfoldLit:
 ### 👤 Login Page (Muhammad Nabiel Subhan):
 * Halaman login yang memungkinkan pengguna masuk ke akun mereka.
 * Halaman registrasi bagi pengguna yang belum memiliki akun.
-* Pada halaman registrasi pengguna akan diminta untuk memilih _books catagories favorite_ mereka.
 
 ### 🔎 Search and Filters (Rumintang Jessica Hutagaol):
 * Halaman pencarian yang menampilkan hasil pencarian buku berdasarkan kata kunci, judul, penulis, atau kategori.
