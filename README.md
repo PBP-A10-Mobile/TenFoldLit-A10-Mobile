@@ -65,7 +65,7 @@ https://www.kaggle.com/datasets/mdhamani/goodreads-books-100k
 [Berita Acara A10](https://docs.google.com/spreadsheets/d/1azkHBVeqnpd1yoqG0f9LsqfLRf2LzaDq/edit#gid=2120975129)
 
 ## 🔃 Alur Pengintegrasian 🔃
-* Menambahkan dependensi http ke proyek; dependensi ini digunakan untuk bertukar HTTP request.
+* Menambahkan dependensi http ke proyek yang akan digunakan untuk bertukar HTTP request.
 * Membuat model pada Flutter yang sesuai dengan struktur data yang dikirim oleh API.
 * Membuat http request ke web service menggunakan dependensi http.
 * Mengonversikan data dari JSON ke objek model Flutter yang telah dibuat pada tahap ke dua.
