@@ -12,38 +12,40 @@ Gita adalah seorang anak yang sangat mencintai dunia literatur. Ia sering mengha
 
 TenfoldLit memungkinkan pengguna untuk melihat ulasan buku dari berbagai genre, serta membaca komentar dari pembaca lainnya. Gita dapat menjadi anggota dan memberikan review serta komentar, dan yang lebih penting, dia dapat memberikan rating kepada buku-buku yang telah dia baca. Ia juga senang bahwa web ini memungkinkan pengguna untuk meminjam buku, melihat stok buku, dan menyimpan buku favoritnya dalam daftar favorit sehingga ia mampu menyusun daftar bacaan selanjutnya dengan lebih mudah. Dengan TenfoldLit, Gita merasa lebih terhubung dengan komunitas pembaca yang sama-sama bersemangat tentang literatur, dan pengalaman membacanya menjadi lebih menyenangkan.
 
+Tidak hanya itu, Gita juga menemukan kepraktisan TenfoldLit karena sudah dapat diakses melalui aplikasi mobile. Dengan begitu, Gita bisa tetap terhubung dengan dunia literatur favoritnya di mana saja dan kapan saja tanpa perlu membuka komputer. Dengan akses yang lebih mudah dan cepat, Gita merasa semakin terintegrasikan dengan komunitas pembaca TenfoldLit, menjadikan pengalaman literaturnya semakin dinamis dan menyenangkan.
+
 ## 🗂️ Daftar Modul 🗂️ 
-Berikut ini beberapa fitur yang disediakan pada situs TenFoldIt:
-### 🏠 Homepage (Halaman Beranda) :
+Berikut ini beberapa fitur yang disediakan pada aplikasi TenfoldLit:
+### 🏠 Homepage (Caressa Putri Yuliantoro) :
 * Tampilan beranda yang menampilkan daftar buku.
 * Ditampilkan opsi pencarian buku.
 * Filter berdasarkan rating, yang paling banyak dicari, atau yang baru diunggah.
 
-### 👤 Login Page (Halaman Login):
+### 👤 Login Page (Muhammad Nabiel Subhan):
 * Halaman login yang memungkinkan pengguna masuk ke akun mereka.
 * Halaman registrasi bagi pengguna yang belum memiliki akun.
-* Pada halaman registrasi pengguna akan diminta untuk memilih _books catagories favorite_ mereka.
 
-### 🔎 Search and Filters (Pencarian dan Filter):
+### 🔎 Search and Filters (Rumintang Jessica Hutagaol):
 * Halaman pencarian yang menampilkan hasil pencarian buku berdasarkan kata kunci, judul, penulis, atau kategori.
 * Filter untuk mengurutkan berdasarkan rating, yang paling banyak dicari, atau yang baru diunggah.
 * Form pencarian untuk mencari buku berdasarkan kata kunci atau kriteria lainnya.
 
-### 📱 Catalog and Favorites (Katalog dan Favorit):
+### 📱 Catalog and Favorites (Vico Adli Narindra):
 * Menampilkan halaman katalog buku yang dapat diakses oleh semua pengguna.
-* Menampilkan halaman katalog pribadi (My Library) yang memungkinkan pengguna menyusun katalog buku pribadi mereka sendiri.
 * Menandai buku agar masuk dalam kategori favorit pengguna dan menampilkan halaman untuk menampilkan buku favorit
-* Form untuk menambah dan menghapus buku dari katalog pribadi pengguna (My Library).
+* Form untuk menambah dan menghapus buku favorit dari katalog pribadi pengguna.
 
-### ⭐️ Review and Ratings (Ulasan dan Peringkat):
+### ⭐️ Review and Ratings (Vico Adli Narindra):
 * Halaman untuk menampilkan ulasan dan peringkat yang diberikan oleh pengguna pada buku tertentu.
 * Form untuk pengguna memberikan ulasan dan peringkat pada buku.
 
-### 📒 My Books (User Own Library):
+### 📒 My Books (Nadhira Raihana Hafez):
 * Halaman User Library untuk menampilkan buku yang dipinjam oleh user.
 * Halaman User Favorite untuk menampilkan buku yang di favorite oleh user
+* Menampilkan halaman katalog pribadi (My Library) yang memungkinkan pengguna menyusun katalog buku pribadi mereka sendiri.
+* Form untuk menambah dan menghapus buku yang dipinjam dari katalog pribadi pengguna.
 
-### Friends:
+### 👫 Friends (Muhammad Nabiel Subhan):
 * Halaman untuk untuk menampilkan friends yang dimiliki oleh user.
 * Berfungsi untuk membuat hubungan dengan user lain sehingga bisa melihat buku favorit dan buku yang sedang dipinjam oleh user tersebut.
 * Dapat mencari nama suatu user untuk mem-follow mereka.
@@ -59,5 +61,12 @@ https://www.kaggle.com/datasets/mdhamani/goodreads-books-100k
 * Guest
     * Pengguna yang belum mendaftarkan diri hanya bisa melihat daftar buku dan review yang ada pada buku tersebut tanpa bisa mengakses fitur lain yang tersedia.
 
-## Berita Acara
+## 📑 Berita Acara 📑
 [Berita Acara A10](https://docs.google.com/spreadsheets/d/1azkHBVeqnpd1yoqG0f9LsqfLRf2LzaDq/edit#gid=2120975129)
+
+## 🔃 Alur Pengintegrasian 🔃
+* Menambahkan dependensi http ke proyek; dependensi ini digunakan untuk bertukar HTTP request.
+* Membuat model pada Flutter yang sesuai dengan struktur data yang dikirim oleh API.
+* Membuat http request ke web service menggunakan dependensi http.
+* Mengonversikan data dari JSON ke objek model Flutter yang telah dibuat pada tahap ke dua.
+* Menggunakan widget seperti `FutureBuilder`untuk menampilkan data yang diterima dari API 
