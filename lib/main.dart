@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:tenfoldlit_mobile/screens/login.dart';
+import 'package:tenfoldlit_mobile/login.dart';
 
 void main() {
   runApp(const MyApp());
