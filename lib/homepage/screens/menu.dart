@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tenfoldlit_mobile/homepage/widgets/left_drawer.dart';
+import 'package:tenfoldlit_mobile/searchAndFilters/screens/search.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  final TextEditingController _searchController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +26,19 @@ class HomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             boxShadow: const [BoxShadow(color: Colors.brown, blurRadius: 2.0)],
           ),
+          
           child: Column(
             children: [
+              TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  labelText: 'Search Books',
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () => _navigateToBookResultsPage(context),
+                  ),
+                ),
+              ),
               SizedBox(height: 10),
               Column(
                 children: [
@@ -107,6 +122,14 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+  void _navigateToBookResultsPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BookResultsPage(searchQuery: _searchController.text),
       ),
     );
   }
