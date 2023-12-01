@@ -12,7 +12,7 @@ class LeftDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-    
+
     return Drawer(
       child: ListView(
         children: [
@@ -55,6 +55,20 @@ class LeftDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.man),
+            title: const Text('Search'),
+            // Redirection ke InventoryPageForm
+            onTap: () {
+              // Replace the code with the navigation logic for the 'Search' page
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const Search(),
+              //   ),
+              // );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.man),
             title: const Text('Profile'),
             // Redirection ke InventoryPageForm
             onTap: () {
@@ -73,7 +87,7 @@ class LeftDrawer extends StatelessWidget {
             // Redirection ke InventoryPageForm
             onTap: () {
               Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const FriendsPage()));
+                  MaterialPageRoute(builder: (context) => const FriendsPage()));
             },
           ),
           ListTile(
@@ -108,8 +122,8 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout_outlined),
             title: const Text('Logout'),
             onTap: () async {
-              final response = await request.logout(
-                "http://127.0.0.1:8000/logout_flutter/");
+              final response =
+                  await request.logout("http://127.0.0.1:8000/logout_flutter/");
               String message = response["message"];
               if (response['status']) {
                 String uname = response["username"];
