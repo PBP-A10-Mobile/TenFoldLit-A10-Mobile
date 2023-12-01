@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:tenfoldlit_mobile/authentication/login.dart';
+import 'package:tenfoldlit_mobile/authentication/screens/login.dart';
 import 'package:tenfoldlit_mobile/homepage/screens/menu.dart';
+import 'package:tenfoldlit_mobile/myLibrary/screens/user_library.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key});
@@ -85,12 +86,12 @@ class LeftDrawer extends StatelessWidget {
             // Redirection ke InventoryPageForm
             onTap: () {
               // Replace the code with the navigation logic for the 'My Library' page
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const MyLibraryPage(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MyLibraryPage(),
+                ),
+              );
             },
           ),
           ListTile(
