@@ -5,10 +5,10 @@ import 'package:tenfoldlit_mobile/myLibrary/models/borrowed_books.dart';
 import 'package:tenfoldlit_mobile/homepage/widgets/left_drawer.dart';
 
 class MyLibraryPage extends StatefulWidget {
-  const MyLibraryPage({super.key});
+  const MyLibraryPage({Key? key}) : super(key: key);
 
   @override
-  State<MyLibraryPage> createState() => _MyLibraryPageState();
+  _MyLibraryPageState createState() => _MyLibraryPageState();
 }
 
 class _MyLibraryPageState extends State<MyLibraryPage> {
@@ -54,7 +54,7 @@ Future<List<BorrowedBooks>> fetchProduct() async {
                     return const Column(
                         children: [
                         Text(
-                            "Tidak ada data produk.",
+                            "Tidak ada data buku.",
                             style:
                                 TextStyle(color: Color(0xff59A5D8), fontSize: 20),
                         ),

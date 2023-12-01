@@ -23,7 +23,6 @@ class HomePage extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.lime[200], // Set background color to cream
-            borderRadius: BorderRadius.circular(20),
             boxShadow: const [BoxShadow(color: Colors.brown, blurRadius: 2.0)],
           ),
           
