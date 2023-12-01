@@ -54,7 +54,7 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.man),
+            leading: const Icon(Icons.search),
             title: const Text('Search'),
             // Redirection ke InventoryPageForm
             onTap: () {
