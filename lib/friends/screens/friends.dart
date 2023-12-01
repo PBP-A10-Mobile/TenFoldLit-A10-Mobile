@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:tenfoldlit_mobile/friends/models/UserConnections.dart';
+import 'package:tenfoldlit_mobile/homepage/widgets/left_drawer.dart';
 
-class FriendPage extends StatefulWidget {
-    const FriendPage({Key? key}) : super(key: key);
+class FriendsPage extends StatefulWidget {
+    const FriendsPage({Key? key}) : super(key: key);
 
     @override
-    _FriendPageState createState() => _FriendPageState();
+    _FriendsPageState createState() => _FriendsPageState();
 }
 
-class _FriendPageState extends State<FriendPage> {
+class _FriendsPageState extends State<FriendsPage> {
 Future<List<UserConnections>> fetchFriends() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
     var url = Uri.parse(
@@ -37,53 +38,34 @@ Future<List<UserConnections>> fetchFriends() async {
 Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: const Text('Friends'),
+          backgroundColor: Colors.brown,
+          title: const Text(
+            'Friends',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
-        body: FutureBuilder(
-            future: fetchFriends(),
-            builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) {
-                    return const Center(child: CircularProgressIndicator());
-                } else {
-                    if (!snapshot.hasData) {
-                    return const Column(
-                        children: [
-                        Text(
-                            "Anda belum mempunyai teman",
-                            style:
-                                TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                        ),
-                        SizedBox(height: 8),
-                        ],
-                    );
-                } else {
-                    return ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (_, index) => Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 12),
-                                padding: const EdgeInsets.all(20.0),
-                                child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                    Text(
-                                    "${snapshot.data![index].fields.name}",
-                                    style: const TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                    ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Text("${snapshot.data![index].fields.price}"),
-                                    const SizedBox(height: 10),
-                                    Text(
-                                        "${snapshot.data![index].fields.description}")
-                                ],
-                                ),
-                            ));
-                    }
-                }
-            }));
+        drawer: const LeftDrawer(),
+        body: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Search', suffixIcon: Icon(Icons.search)
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+            ],
+          )
+        )
+        
+      );
     }
 }
