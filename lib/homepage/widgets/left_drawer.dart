@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tenfoldlit_mobile/authentication/screens/login.dart';
 import 'package:tenfoldlit_mobile/friends/screens/friends.dart';
 import 'package:tenfoldlit_mobile/homepage/screens/menu.dart';
+import 'package:tenfoldlit_mobile/myLibrary/screens/user_library.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key});
@@ -80,6 +81,13 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('My Library'),
             // Redirection ke InventoryPageForm
             onTap: () {
+              // Replace the code with the navigation logic for the 'My Library' page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MyLibraryPage(),
+                ),
+              );
             },
           ),
           ListTile(
