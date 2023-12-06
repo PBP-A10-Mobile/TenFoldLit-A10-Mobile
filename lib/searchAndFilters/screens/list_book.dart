@@ -1,57 +1,49 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:tenfoldlit_mobile/searchAndFilters/models/book.dart';
-import '';
-// Import your Book model and fetchBooks function
+import 'package:tenfoldlit_mobile/searchAndFilters/screens/search.dart';
 
-class BookResultsPage extends StatefulWidget {
-  final String searchQuery;
-  final String genre;
 
-  BookResultsPage({required this.searchQuery, this.genre = ''});
 
-  @override
-  _BookResultsPageState createState() => _BookResultsPageState();
+class BookPage extends StatefulWidget {
+    const BookPage({Key? key}) : super(key: key);
+
+    @override
+    _BookResultsPageState createState() => _BookResultsPageState();
 }
 
-class _BookResultsPageState extends State<BookResultsPage> {
-  Future<List<Book>> fetchBooks(CookieRequest request, String searchQuery, String genre) async {
-  
-  String url = 'http://127.0.0.1:8000/main/json/search_books/';
-  if (searchQuery.isNotEmpty || genre.isNotEmpty) {
-    if (searchQuery.isNotEmpty) {
-      url += searchQuery + "/";
-    }
-    if (genre.isNotEmpty) { 
-      url += genre + "/";
-    }
-  }
-  
-  var response = await request.get(url);
+class _BookResultsPageState extends State<BookPage> {
+Future<List<Book>> fetchProduct() async {
+    var url = Uri.parse(
+        'http://127.0.0.1:8000/json/');
+    var response = await http.get(
+        url,
+        headers: {"Content-Type": "application/json"},
+    );
 
-  List<Book> books = [];
+    // melakukan decode response menjadi bentuk json
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-  for (var d in response){
-    if (d != null) {
-            books.add(Book.fromJson(d));
+    // melakukan konversi data json menjadi object Product
+    List<Book> list_book = [];
+    for (var d in data) {
+        if (d != null) {
+            list_book.add(Book.fromJson(d));
+        }
     }
-  }
-  // print(books);
-  return books;
-  }
+    return list_book;
+}
 
-  @override
-  Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+@override
+Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Search Results')),
-      body: FutureBuilder(
-            future: fetchBooks(request, widget.searchQuery, widget.genre),
+        appBar: AppBar(
+        title: const Text('Book'),
+        ),
+        // drawer: const LeftDrawer(),
+        body: FutureBuilder(
+            future: fetchProduct(),
             builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
                     return const Center(child: CircularProgressIndicator());
@@ -79,13 +71,17 @@ class _BookResultsPageState extends State<BookResultsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                     Text(
-                                    "${snapshot.data![index].fields.title}",
+                                    "${snapshot.data![index].fields.name}",
                                     style: const TextStyle(
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.bold,
                                     ),
                                     ),
-                                  // Can you
+                                    // const SizedBox(height: 10),
+                                    // Text("${snapshot.data![index].fields.price}"),
+                                    // const SizedBox(height: 10),
+                                    // Text(
+                                    //     "${snapshot.data![index].fields.description}")
                                 ],
                                 ),
                             ));
@@ -94,5 +90,3 @@ class _BookResultsPageState extends State<BookResultsPage> {
             }));
     }
 }
-
-
