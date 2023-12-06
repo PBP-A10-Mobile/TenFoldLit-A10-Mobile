@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:tenfoldlit_mobile/myLibrary/models/borrowed_books.dart';
 import 'package:tenfoldlit_mobile/homepage/widgets/left_drawer.dart';
+import 'package:tenfoldlit_mobile/myLibrary/widgets/borrowedbook_card.dart';
 
 class MyLibraryPage extends StatefulWidget {
   const MyLibraryPage({Key? key}) : super(key: key);
@@ -35,7 +36,6 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -63,25 +63,15 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
                   );
               } else {
                   return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 12),
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                  Text(
-                                  "${snapshot.data![index].title}",
-                                  style: const TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                  ),
-                                  ),
-                              ],
-                              ),
-                          ));
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (_, index) => BorrowedBooksCard(
+                                BorrowedBooksDetails(
+                                    Image.network(snapshot.data![index].bookImage), // assuming image is a URL
+                                    snapshot.data![index].title,
+                                    snapshot.data![index].dateEnded.toString()
+                                ),
+                            ),
+                        );
                   }
               }
           }));
