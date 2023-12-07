@@ -22,13 +22,13 @@ class BookResultsPage extends StatefulWidget {
 class _BookResultsPageState extends State<BookResultsPage> {
   Future<List<Book>> fetchBooks(CookieRequest request, String searchQuery, String genre) async {
   
-  String url = 'http://127.0.0.1:8000/main/json/search_books/';
+  String url = 'http://127.0.0.1:8000/get_search_books/';
   if (searchQuery.isNotEmpty || genre.isNotEmpty) {
     if (searchQuery.isNotEmpty) {
-      url += searchQuery + "/";
+      url += searchQuery ;
     }
     if (genre.isNotEmpty) { 
-      url += genre + "/";
+      url += genre;
     }
   }
   

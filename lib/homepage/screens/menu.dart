@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 255, 240, 204),
-            borderRadius: BorderRadius.circular(20),
+            // borderRadius: BorderRadius.circular(20),
             boxShadow: const [BoxShadow(color: Colors.brown, blurRadius: 2.0)],
           ),
           
