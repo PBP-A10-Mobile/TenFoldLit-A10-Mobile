@@ -147,6 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                                     });
                         
                                     if (request.loggedIn) {
+                                        loggedIn = true;
                                         String message = response['message'];
                                         String uname = response['username'];
                                         Navigator.pushReplacement(
