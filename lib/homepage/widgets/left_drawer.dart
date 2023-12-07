@@ -12,7 +12,7 @@ class LeftDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-    
+
     return Drawer(
       child: ListView(
         children: [
@@ -54,6 +54,21 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: const Icon(Icons.search),
+            title: const Text('Search'),
+            // Redirection ke InventoryPageForm
+            onTap: () {
+              // Replace the code with the navigation logic for the 'Search' page
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const Search(),
+              //   ),
+              // );
+            },
+          ),
+          if (loggedIn) ... [
+          ListTile(
             leading: const Icon(Icons.man),
             title: const Text('Profile'),
             // Redirection ke InventoryPageForm
@@ -73,7 +88,7 @@ class LeftDrawer extends StatelessWidget {
             // Redirection ke InventoryPageForm
             onTap: () {
               Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const FriendsPage()));
+                  MaterialPageRoute(builder: (context) => const FriendsPage()));
             },
           ),
           ListTile(
@@ -81,13 +96,22 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('My Library'),
             // Redirection ke InventoryPageForm
             onTap: () {
+              if (loggedIn) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MyLibraryPage(),
+                  ),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
+                  ),
+                );
+              }
               // Replace the code with the navigation logic for the 'My Library' page
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const MyLibraryPage(),
-                ),
-              );
             },
           ),
           ListTile(
@@ -103,30 +127,39 @@ class LeftDrawer extends StatelessWidget {
               //   ),
               // );
             },
-          ),
+          )],
           ListTile(
-            leading: const Icon(Icons.logout_outlined),
-            title: const Text('Logout'),
+            leading: Icon(
+                loggedIn ? Icons.logout_outlined : Icons.login_outlined),
+            title: Text(loggedIn ? 'Logout' : 'Login'),
             onTap: () async {
-              final response = await request.logout(
-                "http://127.0.0.1:8000/logout_flutter/");
-              String message = response["message"];
-              if (response['status']) {
-                String uname = response["username"];
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message Sampai jumpa, $uname."),
-                ));
-                Navigator.pushReplacement(
+              if (loggedIn) {
+                final response = await request
+                    .logout("http://127.0.0.1:8000/logout_flutter/");
+                String message = response["message"];
+                loggedIn = false;
+                if (response['status']) {
+                  String uname = response["username"];
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("$message Sampai jumpa, $uname."),
+                  ));
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("$message"),
+                  ));
+                }
+              } else {
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message"),
-                ));
               }
             },
-          ),
+          )
         ],
       ),
     );
