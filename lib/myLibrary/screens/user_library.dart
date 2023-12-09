@@ -66,10 +66,12 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
                             itemCount: snapshot.data!.length,
                             itemBuilder: (_, index) => BorrowedBooksCard(
                                 BorrowedBooksDetails(
+                                    snapshot.data![index].id,
                                     Image.network(snapshot.data![index].bookImage), // assuming image is a URL
                                     snapshot.data![index].title,
                                     snapshot.data![index].dateEnded.toString()
                                 ),
+                                () {setState(() {});}
                             ),
                         );
                   }
