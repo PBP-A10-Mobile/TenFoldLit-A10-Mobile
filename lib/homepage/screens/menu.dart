@@ -29,30 +29,25 @@ class HomePage extends StatelessWidget {
           
           child: Column(
             children: [
-              TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  labelText: 'Search Books',
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () => _navigateToBookResultsPage(context),
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  padding: EdgeInsets.only(top: 8, right: 16), // Adjust the padding as needed
+                  child: SizedBox(
+                    width: 150,
+                  child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    labelText: 'Search Books',
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.search),
+                      onPressed: () => _navigateToBookResultsPage(context),
+                              ),
+                          ),
+                        ),
                   ),
                 ),
               ),
-              // DropdownButton<String>(
-              //   value: selectedGenre,
-              //   onChanged: (String? newValue) {
-              //     setState(() {
-              //       selectedGenre = newValue ?? 'All';
-              //     });
-              //   },
-              //   items: genres.map<DropdownMenuItem<String>>((String value) {
-              //     return DropdownMenuItem<String>(
-              //       value: value,
-              //       child: Text(value),
-              //     );
-              //   }).toList(),
-              // )
               SizedBox(height: 10),
               Column(
                 children: [

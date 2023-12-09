@@ -5,6 +5,7 @@ import 'package:tenfoldlit_mobile/authentication/screens/login.dart';
 import 'package:tenfoldlit_mobile/friends/screens/friends.dart';
 import 'package:tenfoldlit_mobile/homepage/screens/menu.dart';
 import 'package:tenfoldlit_mobile/myLibrary/screens/user_library.dart';
+import 'package:tenfoldlit_mobile/searchAndFilters/screens/search.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key});
@@ -58,13 +59,12 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Search'),
             // Redirection ke InventoryPageForm
             onTap: () {
-              // Replace the code with the navigation logic for the 'Search' page
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const Search(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>  BookResultsPage(searchQuery: '',),
+                ),
+              );
             },
           ),
           ListTile(

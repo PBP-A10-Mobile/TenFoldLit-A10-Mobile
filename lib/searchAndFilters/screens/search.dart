@@ -21,24 +21,33 @@ class BookResultsPage extends StatefulWidget {
 
 class _BookResultsPageState extends State<BookResultsPage> {
   Future<List<Book>> fetchBooks(CookieRequest request, String searchQuery, String genre) async {
-  
-  String url = 'http://127.0.0.1:8000/main/json/search_books/';
-  if (searchQuery.isNotEmpty || genre.isNotEmpty) {
-    if (searchQuery.isNotEmpty) {
-      url += searchQuery + "/";
-    }
-    if (genre.isNotEmpty) { 
-      url += genre + "/";
-    }
+    String url;
+
+  if (searchQuery.isNotEmpty && genre.isEmpty){
+    url = 'http://127.0.0.1:8000/get_search_books/';
+  }
+  else{
+    url = 'http://127.0.0.1:8000/get_filtered_books/';
   }
   
+  if (searchQuery.isNotEmpty || genre.isNotEmpty) {
+    if (searchQuery.isNotEmpty) {
+      url += searchQuery ;
+    }
+    if (genre.isNotEmpty) { 
+      url += genre ;
+    }
+  } else {
+    throw Exception('Sorry the books you looking for is not found :(');
+  }
+
   var response = await request.get(url);
 
   List<Book> books = [];
 
   for (var d in response){
     if (d != null) {
-            books.add(Book.fromJson(d));
+      books.add(Book.fromJson(d));
     }
   }
   // print(books);
