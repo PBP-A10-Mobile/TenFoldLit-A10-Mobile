@@ -5,6 +5,7 @@ import 'package:tenfoldlit_mobile/authentication/screens/login.dart';
 import 'package:tenfoldlit_mobile/friends/screens/friends.dart';
 import 'package:tenfoldlit_mobile/homepage/screens/menu.dart';
 import 'package:tenfoldlit_mobile/myLibrary/screens/user_library.dart';
+import 'package:tenfoldlit_mobile/profile/screens/profile.dart';
 import 'package:tenfoldlit_mobile/searchAndFilters/screens/search.dart';
 
 class LeftDrawer extends StatelessWidget {
@@ -73,13 +74,12 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Profile'),
             // Redirection ke InventoryPageForm
             onTap: () {
-              // Replace the code with the navigation logic for the 'Profile' page
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const ProfilePage(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
+                ),
+              );
             },
           ),
           ListTile(
