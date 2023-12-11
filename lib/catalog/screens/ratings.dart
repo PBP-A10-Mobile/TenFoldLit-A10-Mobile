@@ -11,7 +11,7 @@ class RatingsPage extends StatefulWidget {
 
 class _RatingsPageState extends State<RatingsPage> {
   Future<List<Map<String, dynamic>>> fetchRatings() async {
-    var url = Uri.parse('http://127.0.0.1:8000/ratings');
+    var url = Uri.parse('http://127.0.0.1:8000/json');
 
     try {
       var response = await http.get(url);

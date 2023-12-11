@@ -80,7 +80,7 @@ class _BookResultsPageState extends State<BookPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${snapshot.data![index].fields.name}",
+                        "${snapshot.data![index].fields.title}",
                         style: const TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
