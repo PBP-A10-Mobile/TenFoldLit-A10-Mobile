@@ -37,7 +37,7 @@ class LeftDrawer extends StatelessWidget {
                 Text(
                   "Hello!",
                   style: TextStyle(
-                    color: Color.fromARGB(100, 50, 100, 3),
+                    color: Colors.white,
                   ),
                 )
               ],
@@ -63,74 +63,79 @@ class LeftDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  BookResultsPage(searchQuery: '%20',),
+                  builder: (context) => BookResultsPage(
+                    searchQuery: '%20',
+                  ),
                 ),
               );
             },
           ),
-          if (loggedIn) ... [
-          ListTile(
-            leading: const Icon(Icons.man),
-            title: const Text('Profile'),
-            // Redirection ke InventoryPageForm
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProfilePage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.group),
-            title: const Text('Friends'),
-            // Redirection ke InventoryPageForm
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const FriendsPage()));
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.book),
-            title: const Text('My Library'),
-            // Redirection ke InventoryPageForm
-            onTap: () {
-              if (loggedIn) {
+          if (loggedIn) ...[
+            ListTile(
+              leading: const Icon(Icons.man),
+              title: const Text('Profile'),
+              // Redirection ke InventoryPageForm
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const MyLibraryPage(),
+                    builder: (context) => ProfilePage(),
                   ),
                 );
-              } else {
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.group),
+              title: const Text('Friends'),
+              // Redirection ke InventoryPageForm
+              onTap: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(),
-                  ),
-                );
-              }
-              // Replace the code with the navigation logic for the 'My Library' page
-            },
-          ),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FriendsPage()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.book),
+              title: const Text('My Library'),
+              // Redirection ke InventoryPageForm
+              onTap: () {
+                if (loggedIn) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MyLibraryPage(),
+                    ),
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                  );
+                }
+                // Replace the code with the navigation logic for the 'My Library' page
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.star_half_outlined),
+              title: const Text('My Favorite'),
+              // Redirection ke InventoryPageForm
+              onTap: () {
+                // Replace the code with the navigation logic for the 'My Favorite' page
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const MyFavoritePage(),
+                //   ),
+                // );
+              },
+            )
+          ],
           ListTile(
-            leading: const Icon(Icons.star_half_outlined),
-            title: const Text('My Favorite'),
-            // Redirection ke InventoryPageForm
-            onTap: () {
-              // Replace the code with the navigation logic for the 'My Favorite' page
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const MyFavoritePage(),
-              //   ),
-              // );
-            },
-          )],
-          ListTile(
-            leading: Icon(
-                loggedIn ? Icons.logout_outlined : Icons.login_outlined),
+            leading:
+                Icon(loggedIn ? Icons.logout_outlined : Icons.login_outlined),
             title: Text(loggedIn ? 'Logout' : 'Login'),
             onTap: () async {
               if (loggedIn) {

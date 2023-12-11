@@ -58,7 +58,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>(); // Assuming CookieRequest is a provider
+    final request =
+        context.watch<CookieRequest>(); // Assuming CookieRequest is a provider
 
     return Scaffold(
       appBar: AppBar(
@@ -79,15 +80,22 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               Align(
-                alignment: Alignment.topRight,
+                alignment: Alignment.topCenter,
                 child: Container(
-                  padding: EdgeInsets.only(
-                      top: 8, right: 16), // Adjust the padding as needed
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 10), // Adjust the padding as needed
                   child: SizedBox(
                     width: 150,
                     child: TextField(
                       controller: _searchController,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(16, 20, 16, 12),
+                        hintStyle: TextStyle(color: Colors.grey),
                         labelText: 'Search Books',
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.search),
@@ -98,11 +106,11 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               Image.asset(
                 'assets/logo.png',
-                height: 100,
-                width: 100,
+                height: 200,
+                width: 200,
               ),
               SizedBox(height: 10),
               Column(
@@ -119,11 +127,11 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Text(
-                      "TenfoldLit",
+                      "Our Features",
                       style: TextStyle(
                         color: Color.fromARGB(
                             255, 255, 255, 255), // Set text color to cream
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -132,50 +140,6 @@ class HomePage extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 6,
-                    ),
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(
-                          255, 139, 108, 75), // Set container color to brown
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Welcome to TenfoldLit! You can explore our book collections by clicking this button below!",
-                          style: TextStyle(
-                            color: Color.fromARGB(
-                                255, 255, 255, 255), // Set text color to cream
-                            fontSize: 16,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const BookPage(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Start Reading',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255)),
-                          ),
-                          style: TextButton.styleFrom(
-                            backgroundColor: Color.fromARGB(
-                                255, 139, 108, 75), // Set button color to brown
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   SizedBox(height: 10),
                   // Menu buttons
                   Wrap(
