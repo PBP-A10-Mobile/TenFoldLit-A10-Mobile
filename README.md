@@ -27,7 +27,7 @@ Berikut ini beberapa fitur yang disediakan pada aplikasi TenfoldLit:
 
 ### 🔎 Search and Filters (Rumintang Jessica Hutagaol):
 * Halaman pencarian yang menampilkan hasil pencarian buku berdasarkan kata kunci, judul, penulis, atau kategori.
-* Filter untuk mengurutkan berdasarkan rating, yang paling banyak dicari, atau yang baru diunggah.
+* Filter untuk mengurutkan berdasarkan yang paling banyak dicari, atau yang baru diunggah.
 * Form pencarian untuk mencari buku berdasarkan kata kunci atau kriteria lainnya.
 
 ### 📱 Catalog and Favorites (Vico Adli Narindra):

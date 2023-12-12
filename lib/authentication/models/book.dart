@@ -30,6 +30,15 @@ class Book {
         "model": modelValues.reverse[model],
         "fields": fields.toJson(),
     };
+
+    bool matchesSearch(String query, String genre) {
+        final lowerCaseQuery = query.toLowerCase();
+        bool matchesQuery = fields.title.toLowerCase().contains(lowerCaseQuery) ||
+                            fields.author.toLowerCase().contains(lowerCaseQuery);
+        bool matchesGenre = genre == 'All' || fields.genre == genre;
+
+        return matchesQuery && matchesGenre;
+    }
 }
 
 class Fields {
