@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:tenfoldlit_mobile/friends/models/UserConnections.dart';
+import 'package:tenfoldlit_mobile/friends/models/user.dart';
+import 'package:tenfoldlit_mobile/friends/screens/search_friends.dart';
 import 'package:tenfoldlit_mobile/homepage/widgets/left_drawer.dart';
 
 class FriendsPage extends StatefulWidget {
@@ -12,60 +14,191 @@ class FriendsPage extends StatefulWidget {
 }
 
 class _FriendsPageState extends State<FriendsPage> {
-Future<List<UserConnections>> fetchFriends() async {
-    // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-    var url = Uri.parse(
-        'http://127.0.0.1:8000/get_friends/');
-    var response = await http.get(
-        url,
-        headers: {"Content-Type": "application/json"},
-    );
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
 
-    // melakukan decode response menjadi bentuk json
-    var dataUser = jsonDecode(utf8.decode(response.bodyBytes));
+  Future<List<User>> fetchFriends() async {
+    final request = context.watch<CookieRequest>();
+    var url = 'http://127.0.0.1:8000/get_friends/';
+    var response = await request.get(url);
 
-    // melakukan konversi data json menjadi object Product
-    List<UserConnections> friends_list = [];
-    for (var friend in dataUser[0].fields.friends) {
-        if (friend != null) {
-            friends_list.add(UserConnections.fromJson(friend));
-        }
+    // melakukan konversi data json menjadi object Item
+    var friends = UserConnections.fromJson(response[0]);
+    int pk = friends.pk;
+    var url2 = 'http://127.0.0.1:8000/get_friends_user_objects/$pk';
+    var users = await request.get(url2);
+    List<User> listFriends = [];
+    for (var temp in users) {
+      var user = User.fromJson(temp);
+      listFriends.add(user);
     }
-    return friends_list;
-}
+    return listFriends;
+  }
 
-@override
-Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.brown,
-          title: const Text(
-            'Friends',
-            style: TextStyle(
-              color: Colors.white,
-            ),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 149, 116, 81),
+        title: const Text(
+          'Friends',
+          style: TextStyle(
+            color: Colors.white,
           ),
         ),
-        drawer: const LeftDrawer(),
-        body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Search', suffixIcon: Icon(Icons.search)
+      ),
+      drawer: const LeftDrawer(),
+      body: Container(
+        // color: Color.fromARGB(255, 255, 240, 204),
+        color: Colors.white,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20,),
+                      Container(
+                        width: 170,
+                        height: 40,
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => const SearchFriendsPage()));
+                
+                            _refreshIndicatorKey.currentState?.show();
+                          },
+                          shape: RoundedRectangleBorder(                                    
+                            borderRadius: BorderRadius.circular(7)
+                          ),
+                          color: const Color.fromARGB(255, 53, 113, 143),
+                          child: Center(
+                            child: Row(
+                              children: [
+                                const SizedBox(width: 10,),
+                                const Text('Add new friend', style: TextStyle(color: Colors.white),),
+                                const SizedBox(width: 10,),
+                                Icon(Icons.group_add_outlined, color: Colors.white,)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FutureBuilder(
+                        future: fetchFriends(),
+                        builder: (context, AsyncSnapshot snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Text(
+                                "You don't have any friends yet.",
+                                style: TextStyle(color: Colors.black, fontSize: 20),
+                              );
+                        } else {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (_, index) {
+                                User currentUser = snapshot.data[index];
+                                int currentUserConnectionsId = currentUser.userConnectionId;
+                                return Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 5),
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: 110,
+                                      margin: EdgeInsets.symmetric(horizontal: 15),
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 2,
+                                        )
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 70,
+                                            width: 70,
+                                            margin: EdgeInsets.only(right: 15),
+                                            child: Icon(Icons.account_circle_outlined, size: 50,),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(vertical: 10),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  currentUser.username,
+                                                  style: const TextStyle(
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    MaterialButton(
+                                                      onPressed: () {
+                                                                                              
+                                                      },
+                                                      shape: RoundedRectangleBorder(                           
+                                                        borderRadius: BorderRadius.circular(10)
+                                                      ),
+                                                      color: Colors.black,
+                                                      child: const Text('See Profile', style: TextStyle(color: Colors.white),),
+                                                    ),
+                                                    const SizedBox(width: 10,),
+                                                    MaterialButton(
+                                                      onPressed: () async {
+                                                        var url = 'http://127.0.0.1:8000/unfollow_friend_flutter/$currentUserConnectionsId/';
+                                                        await request.post(url, null);
+                      
+                                                        // Update the UI
+                                                        setState(() {});
+                
+                                                        // Refresh the FutureBuilder
+                                                        _refreshIndicatorKey.currentState?.show();                
+                                                      },
+                                                      shape: RoundedRectangleBorder(                                    
+                                                        borderRadius: BorderRadius.circular(10)
+                                                      ),
+                                                      color: Color.fromARGB(255, 244, 45, 45),
+                                                      child: const Text('Unfollow', style: TextStyle(color: Colors.white),),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                      ]),
+                                    )
+                                    ],
+                                  ),
+                                );
+                              }
+                            ); 
+                          }
+                        })
+                    ],
+                  )
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
-          )
-        )
-        
-      );
-    }
+            ),
+          ],
+        ),
+      )
+      
+    );
+  }
 }
