@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert';
 import 'package:tenfoldlit_mobile/friends/models/UserConnections.dart';
 import 'package:tenfoldlit_mobile/friends/models/user.dart';
-import 'package:tenfoldlit_mobile/homepage/widgets/left_drawer.dart';
-import 'dart:developer';
+import 'package:tenfoldlit_mobile/friends/screens/friends.dart';
 
 class SearchFriendsPage extends StatefulWidget {
     const SearchFriendsPage({Key? key}) : super(key: key);
@@ -20,7 +17,7 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
   
   Future<List<User>> fetchAllUsers() async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://127.0.0.1:8000/get_all_users/';
+    var url = 'http://127.0.0.1:8000/get_all_user_connections_object/';
     var response = await request.get(url);
 
     // melakukan konversi data json menjadi object Item
@@ -51,14 +48,14 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
   }
 
   Future<User> fetchCurrentUser() async {
-  final request = context.watch<CookieRequest>();
-  var url = 'http://127.0.0.1:8000/get_current_user/';
-  var response = await request.get(url);
+    final request = context.watch<CookieRequest>();
+    var url = 'http://127.0.0.1:8000/get_current_user/';
+    var response = await request.get(url);
 
-  // Assuming the response is a single user object
-  var currentUser = User.fromJson(response[0]);
-  return currentUser;
-}
+    // Assuming the response is a single user object
+    var currentUser = User.fromJson(response[0]);
+    return currentUser;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +63,22 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown,
+        backgroundColor: Color.fromARGB(255, 149, 116, 81),
         title: const Text(
           'Friends',
           style: TextStyle(
             color: Colors.white,
           ),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            // Navigate to another page when the back button is pressed
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const FriendsPage()),
+            );
+          },
         ),
       ),
       body: SingleChildScrollView(
@@ -147,14 +154,16 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
                                         }).toList()
                                       : List.from(snapshot.data!);
                                 
-                                  filteredUsers.removeWhere((user) => user.id == currentUser.id);
+                                  filteredUsers.removeWhere((user) => user.userId == currentUser.userId);
                                   return ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: filteredUsers.length,
                                     itemBuilder: (_, index) {
                                       User currentUser = filteredUsers[index];
+                                      int currentUserId = currentUser.userId;
+                                      int currentUserConnectionsId = currentUser.userConnectionId;
                                       bool isFollowed =
-                                          friendsList.any((friend) => friend.id == currentUser.id);
+                                          friendsList.any((friend) => friend.userId == currentUserId);
                     
                                       return Container(
                                         margin: const EdgeInsets.symmetric(
@@ -198,9 +207,15 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
                                                           ),
                                                         ),
                                                         MaterialButton(
-                                                          onPressed: () {
-                                                            // Trigger a rebuild to update the UI
-                                                            setState(() {});
+                                                          onPressed: () async {
+                                                            if (!isFollowed) {
+                                                              // If not already followed, call followUser function
+                                                              var url = 'http://127.0.0.1:8000/follow_friend_flutter/$currentUserConnectionsId/';
+                                                              await request.post(url, null);
+
+                                                              // Update the UI
+                                                              setState(() {});
+                                                            }
                                                           },
                                                           shape: RoundedRectangleBorder(
                                                               borderRadius: BorderRadius.circular(10)),

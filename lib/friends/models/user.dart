@@ -9,14 +9,16 @@ List<User> userFromJson(String str) => List<User>.from(json.decode(str).map((x) 
 String userToJson(List<User> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class User {
-    int id;
+    int userConnectionId;
+    int userId;
     String password;
     DateTime? lastLogin;
     String username;
     String email;
 
     User({
-        required this.id,
+        required this.userConnectionId,
+        required this.userId,
         required this.password,
         required this.lastLogin,
         required this.username,
@@ -24,7 +26,8 @@ class User {
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
+        userConnectionId: json["user_connection_id"],
+        userId: json["user_id"],
         password: json["password"],
         lastLogin: json["last_login"] == null ? null : DateTime.parse(json["last_login"]),
         username: json["username"],
@@ -32,7 +35,8 @@ class User {
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id,
+        "user_connection_id": userConnectionId,
+        "user_id": userId,
         "password": password,
         "last_login": lastLogin?.toIso8601String(),
         "username": username,

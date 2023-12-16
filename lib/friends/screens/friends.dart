@@ -14,6 +14,9 @@ class FriendsPage extends StatefulWidget {
 }
 
 class _FriendsPageState extends State<FriendsPage> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
   Future<List<User>> fetchFriends() async {
     final request = context.watch<CookieRequest>();
     var url = 'http://127.0.0.1:8000/get_friends/';
@@ -37,7 +40,7 @@ class _FriendsPageState extends State<FriendsPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown,
+        backgroundColor: Color.fromARGB(255, 149, 116, 81),
         title: const Text(
           'Friends',
           style: TextStyle(
@@ -46,134 +49,153 @@ class _FriendsPageState extends State<FriendsPage> {
         ),
       ),
       drawer: const LeftDrawer(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              const SizedBox(height: 20,),
-              Container(
-                width: 170,
-                height: 40,
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const SearchFriendsPage()));
-                  },
-                  shape: RoundedRectangleBorder(                                    
-                    borderRadius: BorderRadius.circular(7)
-                  ),
-                  color: const Color.fromARGB(255, 53, 113, 143),
-                  child: Center(
-                    child: Row(
-                      children: [
-                        const SizedBox(width: 10,),
-                        const Text('Add new friend', style: TextStyle(color: Colors.white),),
-                        const SizedBox(width: 10,),
-                        Icon(Icons.group_add_outlined, color: Colors.white,)
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              FutureBuilder(
-                future: fetchFriends(),
-                builder: (context, AsyncSnapshot snapshot) {
-                if (!snapshot.hasData) {
-                  return const Column(
+      body: Container(
+        // color: Color.fromARGB(255, 255, 240, 204),
+        color: Colors.white,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
                     children: [
-                      Text(
-                        "You don't have any friends yet.",
-                        style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),
-                      SizedBox(height: 8),
-                    ],
-                  );
-                } else {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 5),
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 110,
-                            margin: EdgeInsets.symmetric(horizontal: 15),
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade400,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 2,
-                              )
-                            ),
+                      const SizedBox(height: 20,),
+                      Container(
+                        width: 170,
+                        height: 40,
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => const SearchFriendsPage()));
+                
+                            _refreshIndicatorKey.currentState?.show();
+                          },
+                          shape: RoundedRectangleBorder(                                    
+                            borderRadius: BorderRadius.circular(7)
+                          ),
+                          color: const Color.fromARGB(255, 53, 113, 143),
+                          child: Center(
                             child: Row(
                               children: [
-                                Container(
-                                  height: 70,
-                                  width: 70,
-                                  margin: EdgeInsets.only(right: 15),
-                                  child: Icon(Icons.account_circle_outlined, size: 50,),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                const SizedBox(width: 10,),
+                                const Text('Add new friend', style: TextStyle(color: Colors.white),),
+                                const SizedBox(width: 10,),
+                                Icon(Icons.group_add_outlined, color: Colors.white,)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FutureBuilder(
+                        future: fetchFriends(),
+                        builder: (context, AsyncSnapshot snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Text(
+                                "You don't have any friends yet.",
+                                style: TextStyle(color: Colors.black, fontSize: 20),
+                              );
+                        } else {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (_, index) {
+                                User currentUser = snapshot.data[index];
+                                int currentUserConnectionsId = currentUser.userConnectionId;
+                                return Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 5),
+                                  padding: const EdgeInsets.all(20.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "${snapshot.data[index].username}",
-                                        style: const TextStyle(
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: 110,
+                                      margin: EdgeInsets.symmetric(horizontal: 15),
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 2,
+                                        )
                                       ),
-                                      Row(
+                                      child: Row(
                                         children: [
-                                          MaterialButton(
-                                            onPressed: () {
-                                                                                    
-                                            },
-                                            shape: RoundedRectangleBorder(                           
-                                              borderRadius: BorderRadius.circular(10)
-                                            ),
-                                            color: Colors.brown.shade400,
-                                            child: const Text('See Profile', style: TextStyle(color: Colors.white),),
+                                          Container(
+                                            height: 70,
+                                            width: 70,
+                                            margin: EdgeInsets.only(right: 15),
+                                            child: Icon(Icons.account_circle_outlined, size: 50,),
                                           ),
-                                          const SizedBox(width: 10,),
-                                          MaterialButton(
-                                            onPressed: () {
-                                                                                    
-                                            },
-                                            shape: RoundedRectangleBorder(                                    
-                                              borderRadius: BorderRadius.circular(10)
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(vertical: 10),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  currentUser.username,
+                                                  style: const TextStyle(
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    MaterialButton(
+                                                      onPressed: () {
+                                                                                              
+                                                      },
+                                                      shape: RoundedRectangleBorder(                           
+                                                        borderRadius: BorderRadius.circular(10)
+                                                      ),
+                                                      color: Colors.black,
+                                                      child: const Text('See Profile', style: TextStyle(color: Colors.white),),
+                                                    ),
+                                                    const SizedBox(width: 10,),
+                                                    MaterialButton(
+                                                      onPressed: () async {
+                                                        var url = 'http://127.0.0.1:8000/unfollow_friend_flutter/$currentUserConnectionsId/';
+                                                        await request.post(url, null);
+                      
+                                                        // Update the UI
+                                                        setState(() {});
+                
+                                                        // Refresh the FutureBuilder
+                                                        _refreshIndicatorKey.currentState?.show();                
+                                                      },
+                                                      shape: RoundedRectangleBorder(                                    
+                                                        borderRadius: BorderRadius.circular(10)
+                                                      ),
+                                                      color: Color.fromARGB(255, 244, 45, 45),
+                                                      child: const Text('Unfollow', style: TextStyle(color: Colors.white),),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
                                             ),
-                                            color: Color.fromARGB(255, 244, 45, 45),
-                                            child: const Text('Unfollow', style: TextStyle(color: Colors.white),),
                                           ),
-                                        ],
-                                      )
+                                      ]),
+                                    )
                                     ],
                                   ),
-                                ),
-                            ]),
-                          )
-                          ],
-                        ),
-                      ));
-                    }
-                })
-            ],
-          )
+                                );
+                              }
+                            ); 
+                          }
+                        })
+                    ],
+                  )
+                ),
+              ),
+            ),
+          ],
         ),
       )
       
