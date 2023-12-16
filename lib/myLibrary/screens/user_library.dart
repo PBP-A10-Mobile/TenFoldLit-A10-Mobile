@@ -38,13 +38,19 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 149, 116, 81),
           title: const Text(
             'My Library',
+            style: TextStyle(color: Colors.white)
           ),
         ),
+        
         drawer: const LeftDrawer(),
 
-    body: FutureBuilder(
+    body: Container(
+          padding: EdgeInsets.all(10),
+          color: Color.fromARGB(255, 255, 240, 204),
+          child: FutureBuilder(
           future: fetchProduct(request),
           builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
@@ -76,6 +82,6 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
                         );
                   }
               }
-          }));
+          })));
   }
 }

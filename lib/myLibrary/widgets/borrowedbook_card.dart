@@ -21,11 +21,13 @@ class BorrowedBooksCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     return Card(
+      color: Color.fromARGB(255, 255, 233, 182),
       child: ListTile(
         leading: book.image,
         title: Text(book.title),
         subtitle: Text('Due on: ${book.date_ended.substring(0, 10)}'),
         trailing: ElevatedButton(
+          
           onPressed: () async {
             String url = 'http://127.0.0.1:8000/return-book/';
             url += book.id.toString();
@@ -33,7 +35,11 @@ class BorrowedBooksCard extends StatelessWidget {
 
             onDelete();
           },
-          child: Text('Return Book'),
+          child: Text('Return Book',
+                style: TextStyle(color: Color.fromARGB(255, 255, 240, 204))),
+          style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.brown),
+        ),
         ),
       ),
     );
