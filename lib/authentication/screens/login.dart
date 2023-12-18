@@ -44,11 +44,12 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.brown.shade50,
             appBar: AppBar(
                 title: Center(child: const Text('TenfoldLit')),
-                backgroundColor: Colors.brown.shade400,
+                backgroundColor: Color.fromARGB(255, 149, 116, 81),
                 foregroundColor: Colors.white,
             ),
             body: SafeArea(
               child: Container(
+                  color: const Color.fromARGB(255, 255, 240, 204),
                   padding: const EdgeInsets.all(16.0),
                   child: Center(
                     child: Column(
@@ -63,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                             const SizedBox(height: 30,),
                             TextField(
                                 controller: _usernameController,
-                                cursorColor: Colors.black,
+                                cursorColor: Colors.brown,
                                 decoration: InputDecoration(
                                     labelText: 'Username',
                                     hintText: 'Username',
@@ -72,13 +73,13 @@ class _LoginPageState extends State<LoginPage> {
                                       fontSize: 14
                                     ),
                                     labelStyle: const TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.brown,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400
                                     ),
                                     prefixIcon: const Icon(Icons.account_circle_outlined, color: Colors.black, size: 18,),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey.shade400, width: 2),
+                                      borderSide: BorderSide(color: Colors.brown.shade200, width: 2),
                                       borderRadius: BorderRadius.circular(10)
                                     ),
                                     floatingLabelStyle: const TextStyle(
@@ -86,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                                       fontSize: 18
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.black, width: 1.5),
+                                      borderSide: BorderSide(color: Colors.brown.shade600, width: 1.5),
                                       borderRadius: BorderRadius.circular(10)
                                     )
                                 ),
@@ -94,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                             const SizedBox(height: 12.0),
                             TextField(
                                 controller: _passwordController,
-                                cursorColor: Colors.black,
+                                cursorColor: Colors.brown,
                                 decoration: InputDecoration(
                                     labelText: 'Password',
                                     hintText: 'Password',
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                                       fontSize: 14
                                     ),
                                     labelStyle: const TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.brown,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400
                                     ),
@@ -117,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                       child: Icon(passToggle ? Icons.visibility : Icons.visibility_off),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey.shade400, width: 2),
+                                      borderSide: BorderSide(color: Colors.brown.shade200, width: 2),
                                       borderRadius: BorderRadius.circular(10)
                                     ),
                                     floatingLabelStyle: const TextStyle(
@@ -125,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                       fontSize: 18
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.black, width: 1.5),
+                                      borderSide: BorderSide(color: Colors.brown.shade600, width: 1.5),
                                       borderRadius: BorderRadius.circular(10)
                                     )
                                 ),
@@ -183,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
 
                                   borderRadius: BorderRadius.circular(10)
                                 ),
-                                color: Colors.brown,
+                                color: Color.fromARGB(255, 154, 118, 80),
                                 child: const Text('Login', style: TextStyle(color: Colors.white),),
                             ),
                             const SizedBox(height: 15.0),
