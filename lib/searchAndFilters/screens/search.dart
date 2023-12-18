@@ -28,10 +28,10 @@ class _BookResultsPageState extends State<BookResultsPage> {
 
     if (searchQuery.isNotEmpty || genre.isNotEmpty) {
       if (searchQuery.isNotEmpty) {
-        url = 'http://127.0.0.1:8000/get_search_books/' + searchQuery;
+        url = 'http://10.0.2.2:8000/get_search_books/' + searchQuery;
       }
       if (genre.isNotEmpty) {
-        url = 'http://127.0.0.1:8000/get_filtered_books/' + genre;
+        url = 'http://10.0.2.2:8000/get_filtered_books/' + genre;
       }
     } else {
       throw Exception('Sorry, the books you are looking for are not found :(');

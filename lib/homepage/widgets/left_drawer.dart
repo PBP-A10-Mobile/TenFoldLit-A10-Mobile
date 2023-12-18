@@ -140,7 +140,7 @@ class LeftDrawer extends StatelessWidget {
             onTap: () async {
               if (loggedIn) {
                 final response = await request
-                    .logout("http://127.0.0.1:8000/logout_flutter/");
+                    .logout("http://10.0.2.2:8000/logout_flutter/");
                 String message = response["message"];
                 loggedIn = false;
                 if (response['status']) {
