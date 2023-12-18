@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:tenfoldlit_mobile/authentication/screens/login.dart';
 import 'dart:convert';
 import 'package:tenfoldlit_mobile/catalog/models/book.dart';
 
@@ -11,6 +14,8 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookResultsPageState extends State<BookPage> {
+  String _date = "";
+  String date = "";
   Future<List<Book>> fetchProduct() async {
     var url = Uri.parse('http://127.0.0.1:8000/json/');
     var response = await http.get(
@@ -46,6 +51,7 @@ class _BookResultsPageState extends State<BookPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Book'),
@@ -86,11 +92,116 @@ class _BookResultsPageState extends State<BookPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          addToFavorites(snapshot.data![index].id);
-                        },
-                        child: Text('Add to Favorites'),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              addToFavorites(snapshot.data![index].id);
+                            },
+                            child: Text('Add to Favorites'),
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(left: 8.0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (loggedIn) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        String borrowUntil = 'Borrow until : ';
+
+                                        return StatefulBuilder(
+                                          builder: (BuildContext context,
+                                              StateSetter setState) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                borrowUntil,
+                                                style: TextStyle(fontSize: 15),
+                                              ),
+                                              content: ElevatedButton(
+                                                onPressed: () async {
+                                                  final DateTime? picked =
+                                                      await showDatePicker(
+                                                    context: context,
+                                                    initialDate: DateTime.now(),
+                                                    firstDate:
+                                                        DateTime(2015, 8),
+                                                    lastDate: DateTime(2101),
+                                                  );
+                                                  if (picked != null) {
+                                                    setState(() {
+                                                      date = picked
+                                                          .toIso8601String()
+                                                          .split('T')[0]
+                                                          .toString();
+                                                      _date = date;
+                                                      borrowUntil =
+                                                          'Borrow until : ' +
+                                                              date;
+                                                    });
+                                                  }
+                                                },
+                                                child: Text('Pick borrow date'),
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  child: Text('Submit'),
+                                                  onPressed: () async {
+                                                    String url =
+                                                        'http://127.0.0.1:8000/borrow-books-flutter/';
+                                                    url += snapshot
+                                                        .data![index].pk
+                                                        .toString();
+                                                    print(
+                                                        DateTime.parse(_date));
+                                                    final response =
+                                                        await request.postJson(
+                                                            url,
+                                                            jsonEncode(<String,
+                                                                String>{
+                                                              "date_ended":
+                                                                  _date
+                                                            }));
+                                                    if (response['status'] ==
+                                                        'success') {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              const SnackBar(
+                                                        content: Text(
+                                                            "Berhasil meminjam buku!"),
+                                                      ));
+                                                      Navigator.pop(context);
+                                                    } else {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              const SnackBar(
+                                                        content: Text(
+                                                            "Gagal. Buku sedang dipinjam."),
+                                                      ));
+                                                      Navigator.pop(context);
+                                                    }
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LoginPage(),
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: Text('Borrow Book'),
+                              ))
+                        ],
                       ),
                     ],
                   ),
