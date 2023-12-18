@@ -106,8 +106,8 @@ class _UserProfilePageState extends State<UserProfilePage> with SingleTickerProv
                             ),
                           ),
                           const SizedBox(height: 10,),
-                          Text(widget.user.username),
-                          Text(widget.user.email),
+                          Text(widget.user.username, style: const TextStyle(fontSize: 16),),
+                          Text(widget.user.email, style: const TextStyle(fontSize: 16),),
                           const SizedBox(height: 30,),
                           Container(
                             child: TabBar(
