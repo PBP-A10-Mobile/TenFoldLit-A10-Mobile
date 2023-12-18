@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                                     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                                     // Untuk menyambungkan Android emulator dengan Django pada localhost,
                                     // gunakan URL http://10.0.2.2/
-                                    final response = await request.login("http://127.0.0.1:8000/login_flutter/", {
+                                    final response = await request.login("http://10.0.2.2:8000/login_flutter/", {
                                     'username': username,
                                     'password': password,
                                     });
