@@ -135,7 +135,7 @@ class _UserProfilePageState extends State<UserProfilePage> with SingleTickerProv
                                         return Container(
                                           child: const Center(
                                             child: Text(
-                                              "Your friends does not have any favorite books yet."
+                                              "Your friend does not have any favorite books yet."
                                             )
                                           )
                                         );
@@ -221,7 +221,7 @@ class _UserProfilePageState extends State<UserProfilePage> with SingleTickerProv
                                         return Container(
                                           child: const Center(
                                             child: Text(
-                                              "Your friends has not borrowed any books yet."
+                                              "Your friend has not borrowed any books yet."
                                             )
                                           )
                                         );
