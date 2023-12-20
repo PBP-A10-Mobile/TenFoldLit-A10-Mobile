@@ -32,7 +32,7 @@ class _UserProfilePageState extends State<UserProfilePage> with SingleTickerProv
 
   Future<List<Book>> fetchFavoriteBooks(int userId) async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://10.0.2.2:8000/get_favorite_books_user/$userId/';
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_favorite_books_user/$userId/';
     var response = await request.get(url);
 
     // melakukan konversi data json menjadi object Item
@@ -46,7 +46,7 @@ class _UserProfilePageState extends State<UserProfilePage> with SingleTickerProv
 
   Future<Profile> fetchUserProfile(int userId) async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://10.0.2.2:8000/get_user_profile/$userId/';
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_user_profile/$userId/';
     var response = await request.get(url);
 
     // melakukan konversi data json menjadi object Item
@@ -56,7 +56,7 @@ class _UserProfilePageState extends State<UserProfilePage> with SingleTickerProv
 
   Future<List<Book>> fetchBorrowedBooks(int userId) async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://10.0.2.2:8000/get_borrowed_books_user/$userId/';
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_borrowed_books_user/$userId/';
     var response = await request.get(url);
 
     // melakukan konversi data json menjadi object Item

@@ -24,13 +24,13 @@ class _FriendsPageState extends State<FriendsPage> {
 
   Future<List<User>> fetchFriends() async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://10.0.2.2:8000/get_friends/';
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_friends/';
     var response = await request.get(url);
 
     // melakukan konversi data json menjadi object Item
     var friends = UserConnections.fromJson(response[0]);
     int pk = friends.pk;
-    var url2 = 'http://10.0.2.2:8000/get_friends_user_objects/$pk';
+    var url2 = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_friends_user_objects/$pk';
     var users = await request.get(url2);
     List<User> listFriends = [];
     for (var temp in users) {
@@ -42,7 +42,7 @@ class _FriendsPageState extends State<FriendsPage> {
 
   Future<Profile> fetchUserProfile(int userId) async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://10.0.2.2:8000/get_user_profile/$userId/';
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_user_profile/$userId/';
     var response = await request.get(url);
 
     // melakukan konversi data json menjadi object Item
@@ -239,7 +239,7 @@ class _FriendsPageState extends State<FriendsPage> {
                                                   const SizedBox(width: 13,),
                                                   MaterialButton(
                                                     onPressed: () async {
-                                                      var url = 'http://10.0.2.2:8000/unfollow_friend_flutter/$currentUserConnectionsId/';
+                                                      var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/unfollow_friend_flutter/$currentUserConnectionsId/';
                                                       await request.post(url, null);
                                                       
                                                       // Update the UI

@@ -18,7 +18,7 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
 
   Future<List<User>> fetchAllUsers() async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://10.0.2.2:8000/get_all_user_connections_object/';
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_all_user_connections_object/';
     var response = await request.get(url);
 
     List<User> listUsers = [];
@@ -31,12 +31,12 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
 
   Future<List<User>> fetchFriends() async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://10.0.2.2:8000/get_friends/';
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_friends/';
     var response = await request.get(url);
 
     var friends = UserConnections.fromJson(response[0]);
     int pk = friends.pk;
-    var url2 = 'http://10.0.2.2:8000/get_friends_user_objects/$pk';
+    var url2 = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_friends_user_objects/$pk';
     var users = await request.get(url2);
     List<User> listFriends = [];
     for (var temp in users) {
@@ -48,7 +48,7 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
 
   Future<Profile> fetchUserProfile(int userId) async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://10.0.2.2:8000/get_user_profile/$userId/';
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_user_profile/$userId/';
     var response = await request.get(url);
 
     var profile = Profile.fromJson(response[0]);
@@ -57,7 +57,7 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
 
   Future<User> fetchCurrentUser() async {
     final request = context.watch<CookieRequest>();
-    var url = 'http://10.0.2.2:8000/get_current_user/';
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_current_user/';
     var response = await request.get(url);
 
     var currentUser = User.fromJson(response[0]);
@@ -233,7 +233,7 @@ class _SearchFriendsPageState extends State<SearchFriendsPage> {
                                                               onPressed: () async {
                                                                 if (!isFollowed) {
                                                                   var url =
-                                                                      'http://10.0.2.2:8000/follow_friend_flutter/$currentUserConnectionsId/';
+                                                                      'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/follow_friend_flutter/$currentUserConnectionsId/';
                                                                   await request.post(url, null);
 
                                                                   setState(() {});
