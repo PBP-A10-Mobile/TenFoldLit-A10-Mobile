@@ -18,7 +18,7 @@ flutter doctor
 echo "Installed flutter to `pwd`/flutter"
 
 # export keystore for release
-echo "$KEY_JKS" | base64 --decode > release-keystore.jks
+echo "$KEY_JKS" | base64 --decode > upload-keystore.jks
 
 # build APK
 # if you get "Execution failed for task ':app:lintVitalRelease'." error, uncomment next two lines

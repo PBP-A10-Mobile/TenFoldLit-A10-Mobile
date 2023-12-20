@@ -34,7 +34,7 @@ jobs:
       - name: Generate Java keystore
         env: 
           KEY_JKS: ${{ secrets.KEY_JKS }}
-        run: echo "$KEY_JKS" | base64 --decode > release-keystore.jks 
+        run: echo "$KEY_JKS" | base64 --decode > upload-keystore.jks 
               
       - name: Build APK
         env:
