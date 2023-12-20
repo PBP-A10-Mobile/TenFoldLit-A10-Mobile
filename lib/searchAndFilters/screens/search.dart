@@ -31,10 +31,10 @@ class _BookResultsPageState extends State<BookResultsPage> {
 
     if (searchQuery.isNotEmpty || genre.isNotEmpty) {
       if (searchQuery.isNotEmpty) {
-        url = 'http://10.0.2.2:8000/get_search_books/' + searchQuery;
+        url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_search_books/' + searchQuery;
       }
       if (genre.isNotEmpty) {
-        url = 'http://10.0.2.2:8000/get_filtered_books/' + genre;
+        url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get_filtered_books/' + genre;
       }
     } else {
       throw Exception('Sorry, the books you are looking for are not found :(');
@@ -245,7 +245,7 @@ class _BookResultsPageState extends State<BookResultsPage> {
                                                                 onPressed:
                                                                     () async {
                                                                   String url =
-                                                                      'http://127.0.0.1:8000/borrow-books-flutter/';
+                                                                      'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/borrow-books-flutter/';
                                                                   url += snapshot
                                                                       .data![
                                                                           index]

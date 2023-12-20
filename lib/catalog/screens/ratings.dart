@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 import 'dart:convert';
+
+import 'package:tenfoldlit_mobile/catalog/models/book.dart';
 
 class RatingsPage extends StatefulWidget {
   const RatingsPage({Key? key}) : super(key: key);
@@ -10,20 +14,18 @@ class RatingsPage extends StatefulWidget {
 }
 
 class _RatingsPageState extends State<RatingsPage> {
-  Future<List<Map<String, dynamic>>> fetchRatings() async {
-    var url = Uri.parse('http://127.0.0.1:8000/json');
+  Future<List<Book>> fetchRatings() async {
+    final request = context.watch<CookieRequest>();
+    var url = 'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/ratings_json/';
 
-    try {
-      var response = await http.get(url);
-
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      } else {
-        throw Exception('Failed to load ratings');
+    var response = await request.get(url);
+      List<Book> listBook = [];
+      for (var temp in response) {
+        var book = Book.fromJson(temp);
+        listBook.add(book);
       }
-    } catch (error) {
-      throw Exception('Error: $error');
-    }
+      return listBook;
+      
   }
 
   @override
@@ -34,22 +36,40 @@ class _RatingsPageState extends State<RatingsPage> {
       ),
       body: FutureBuilder(
         future: fetchRatings(),
-        builder: (context, AsyncSnapshot snapshot) {
+        builder: (context, AsyncSnapshot<List<Book>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else {
-            if (!snapshot.hasData || snapshot.data.isEmpty) {
+            if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Center(
                 child: Text('No ratings available for this book.'),
               );
             } else {
               return ListView.builder(
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text('Rating: ${snapshot.data[index]['rating']}'),
-                    subtitle:
-                        Text('Comment: ${snapshot.data[index]['comment']}'),
+                    title: Text('Title: ${snapshot.data![index].fields.title}'),
+                    subtitle: Column(
+                      children: [
+                        Container(
+                        height: 300,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            snapshot.data![index].fields.img,
+                            fit: BoxFit.cover, 
+                          ),
+                        ),
+                      ),
+                        Text('Rating: ${snapshot.data![index].fields.rating}'),
+                      ],
+                    ),
+                    
                   );
                 },
               );

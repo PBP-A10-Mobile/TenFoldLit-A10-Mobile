@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:tenfoldlit_mobile/authentication/screens/login.dart';
+import 'package:tenfoldlit_mobile/catalog/screens/ratings.dart';
 import 'package:tenfoldlit_mobile/friends/screens/friends.dart';
 import 'package:tenfoldlit_mobile/homepage/screens/menu.dart';
 import 'package:tenfoldlit_mobile/myLibrary/screens/user_library.dart';
@@ -70,6 +71,19 @@ class LeftDrawer extends StatelessWidget {
               );
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.star),
+            title: const Text('Ratings'),
+            // Redirection ke InventoryPageForm
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RatingsPage(),
+                ),
+              );
+            },
+          ),
           if (loggedIn) ...[
             ListTile(
               leading: const Icon(Icons.man),
@@ -89,10 +103,19 @@ class LeftDrawer extends StatelessWidget {
               title: const Text('Friends'),
               // Redirection ke InventoryPageForm
               onTap: () {
+                if (loggedIn) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const FriendsPage()));
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                  );
+                }
               },
             ),
             ListTile(
@@ -118,20 +141,6 @@ class LeftDrawer extends StatelessWidget {
                 // Replace the code with the navigation logic for the 'My Library' page
               },
             ),
-            ListTile(
-              leading: const Icon(Icons.star_half_outlined),
-              title: const Text('My Favorite'),
-              // Redirection ke InventoryPageForm
-              onTap: () {
-                // Replace the code with the navigation logic for the 'My Favorite' page
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const MyFavoritePage(),
-                //   ),
-                // );
-              },
-            )
           ],
           ListTile(
             leading:
@@ -140,7 +149,7 @@ class LeftDrawer extends StatelessWidget {
             onTap: () async {
               if (loggedIn) {
                 final response = await request
-                    .logout("http://10.0.2.2:8000/logout_flutter/");
+                    .logout("https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/logout_flutter/");
                 String message = response["message"];
                 loggedIn = false;
                 if (response['status']) {

@@ -18,7 +18,7 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
   Future<List<BorrowedBooks>> fetchProduct(request) async {
 
     var response = await request.get(
-      'http://127.0.0.1:8000/get-borrowed-books/',
+      'https://tenfoldlit-a10-tk.pbp.cs.ui.ac.id/get-borrowed-books/',
     );
 
     // melakukan decode response menjadi bentuk json

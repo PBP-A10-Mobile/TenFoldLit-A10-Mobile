@@ -3,7 +3,6 @@ import 'package:tenfoldlit_mobile/homepage/widgets/left_drawer.dart';
 import 'package:tenfoldlit_mobile/searchAndFilters/screens/search.dart';
 import 'package:tenfoldlit_mobile/catalog/screens/book_list.dart';
 import 'package:tenfoldlit_mobile/myLibrary/screens/user_library.dart';
-import 'package:tenfoldlit_mobile/catalog/screens/my_favorite.dart';
 import 'package:tenfoldlit_mobile/authentication/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -152,17 +151,6 @@ class HomePage extends StatelessWidget {
                             navigateToPage(context, const LoginApp());
                           } else {
                             navigateToPage(context, const MyLibraryPage());
-                          }
-                        },
-                      ),
-                      FeatureContainer(
-                        title: 'My Favorite',
-                        icon: Icons.star,
-                        onTap: () {
-                          if (!request.loggedIn) {
-                            navigateToPage(context, const LoginApp());
-                          } else {
-                            navigateToPage(context, const MyFavoritesPage());
                           }
                         },
                       ),

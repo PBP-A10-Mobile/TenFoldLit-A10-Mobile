@@ -9,12 +9,12 @@ class UserData {
 
   static User myUser = User(
     image:
-        "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
+        "https://i.pinimg.com/564x/0d/42/90/0d42905fc5e9d14fa032d8ea0282bf68.jpg",
     name: 'Test Test',
     email: 'test.test@gmail.com',
     phone: '(208) 206-5039',
     aboutMeDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
+        'Enter your description here!',
   );
 
   static Future init() async =>

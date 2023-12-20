@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tenfoldlit_mobile/homepage/widgets/left_drawer.dart';
 import 'package:tenfoldlit_mobile/profile/models/user.dart';
 import 'package:tenfoldlit_mobile/profile/models/user_data.dart';
 import 'package:tenfoldlit_mobile/profile/screens/edit_description.dart';
@@ -22,24 +23,22 @@ class _ProfilePageState extends State<ProfilePage> {
     final user = UserData.myUser;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 149, 116, 81),
+        title: const Text(
+          'Profile',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+      drawer: const LeftDrawer(),
       body: Column(
         children: [
-          AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            toolbarHeight: 10,
-          ),
           Center(
               child: Padding(
                   padding: EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    'Edit Profile',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
-                      color: Color.fromRGBO(64, 105, 225, 1),
-                    ),
-                  ))),
+                  )),
           InkWell(
               onTap: () {
                 navigateSecondPage(EditImagePage());
