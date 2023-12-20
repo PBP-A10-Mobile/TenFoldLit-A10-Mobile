@@ -69,6 +69,8 @@ https://www.kaggle.com/datasets/mdhamani/goodreads-books-100k
 * Membuat model pada Flutter yang sesuai dengan struktur data yang dikirim oleh API.
 * Membuat http request ke web service menggunakan dependensi http.
 * Mengonversikan data dari JSON ke objek model Flutter yang telah dibuat pada tahap ke dua.
-* Menggunakan widget seperti `FutureBuilder`untuk menampilkan data yang diterima dari API 
+* Menggunakan widget seperti `FutureBuilder`untuk menampilkan data yang diterima dari API
+
+https://install.appcenter.ms/orgs/tenfoldlit-mobile/apps/tenfoldlit/distribution_groups/public
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/4f741de7-dd1d-49b5-98a5-886ae6f8b4df/branches/main/badge)](https://appcenter.ms)
