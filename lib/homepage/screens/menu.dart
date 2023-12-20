@@ -80,22 +80,15 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               Align(
-                alignment: Alignment.topCenter,
+                alignment: Alignment.topRight,
                 child: Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 10), // Adjust the padding as needed
+                  padding: EdgeInsets.only(
+                      top: 8, right: 16), // Adjust the padding as needed
                   child: SizedBox(
                     width: 150,
                     child: TextField(
                       controller: _searchController,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(16, 20, 16, 12),
-                        hintStyle: TextStyle(color: Colors.grey),
                         labelText: 'Search Books',
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.search),
